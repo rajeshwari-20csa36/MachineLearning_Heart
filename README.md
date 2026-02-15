@@ -218,16 +218,6 @@ All models were evaluated using six comprehensive metrics:
    - Test all features in the deployed app
    - Ensure model loading works correctly
 
-## Assignment Compliance
-
-✅ **Dataset Requirements**: 13 features, 1,025 instances  
-✅ **Model Implementation**: All 6 required models implemented  
-✅ **Evaluation Metrics**: All 6 metrics calculated for each model  
-✅ **Streamlit Features**: All required features implemented  
-✅ **GitHub Repository**: Proper structure with all required files  
-✅ **Requirements File**: Complete dependency list  
-✅ **README Documentation**: Comprehensive with comparison table and observations  
-
 ## Future Enhancements
 
 1. **Hyperparameter Tuning**: Implement GridSearchCV for optimization
@@ -239,13 +229,9 @@ All models were evaluated using six comprehensive metrics:
 
 ## Contributors
 
-- **Developed by**: [Your Name]
+- **Developed by**: Rajeshwari Marimuthu
 - **Assignment**: M.Tech (AIML/DSE) - Machine Learning Assignment 2
 - **Institution**: BITS Pilani - Work Integrated Learning Programmes Division
-
-## License
-
-This project is developed for educational purposes as part of the Machine Learning course assignment.
 
 ---
 
