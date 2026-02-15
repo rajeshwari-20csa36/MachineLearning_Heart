@@ -52,13 +52,20 @@ def load_models():
     
     return models, scaler, feature_names
 
-# Load model results
+# Load model results - embedded for deployment compatibility
 @st.cache_data
 def load_model_results():
-    try:
-        return pd.read_csv('model_results.csv', index_col=0)
-    except FileNotFoundError:
-        return None
+    # Embed model results directly to avoid file loading issues in deployment
+    data = {
+        'Accuracy': [0.8098, 0.9854, 0.8634, 0.8293, 1.0000, 1.0000],
+        'AUC': [0.9298, 0.9857, 0.9629, 0.9043, 1.0000, 1.0000],
+        'Precision': [0.7619, 1.0000, 0.8738, 0.8070, 1.0000, 1.0000],
+        'Recall': [0.9143, 0.9714, 0.8571, 0.8762, 1.0000, 1.0000],
+        'F1 Score': [0.8312, 0.9855, 0.8654, 0.8402, 1.0000, 1.0000],
+        'MCC': [0.6309, 0.9712, 0.7269, 0.6602, 1.0000, 1.0000]
+    }
+    index = ['Logistic Regression', 'Decision Tree', 'K-Nearest Neighbor', 'Naive Bayes', 'Random Forest', 'XGBoost']
+    return pd.DataFrame(data, index=index)
 
 # Main app
 def main():
@@ -95,65 +102,63 @@ def main():
         - **Instances**: 1,025 patient records
         """)
         
-        if model_results is not None:
-            st.subheader("Model Performance Overview")
-            st.dataframe(model_results.style.highlight_max(axis=0, color='lightgreen'))
+        st.subheader("Model Performance Overview")
+        st.dataframe(model_results.style.highlight_max(axis=0, color='lightgreen'))
     
     elif page == "Model Comparison":
         st.header("Model Performance Comparison")
         
-        if model_results is not None:
-            # Display comparison table
-            st.subheader("Evaluation Metrics Comparison")
-            st.dataframe(model_results.style.format("{:.4f}").highlight_max(axis=0, color='lightgreen'))
-            
-            # Create visualizations
-            col1, col2 = st.columns(2)
-            
-            with col1:
-                st.subheader("Accuracy Comparison")
-                fig, ax = plt.subplots(figsize=(10, 6))
-                model_results['Accuracy'].sort_values().plot(kind='barh', ax=ax, color='skyblue')
-                ax.set_xlabel('Accuracy')
-                ax.set_title('Model Accuracy Comparison')
-                plt.tight_layout()
-                st.pyplot(fig)
-            
-            with col2:
-                st.subheader("AUC Score Comparison")
-                fig, ax = plt.subplots(figsize=(10, 6))
-                model_results['AUC'].sort_values().plot(kind='barh', ax=ax, color='lightcoral')
-                ax.set_xlabel('AUC Score')
-                ax.set_title('Model AUC Score Comparison')
-                plt.tight_layout()
-                st.pyplot(fig)
-            
-            # Metrics radar chart
-            st.subheader("Comprehensive Metrics Comparison")
-            metrics_to_plot = ['Accuracy', 'AUC', 'Precision', 'Recall', 'F1 Score', 'MCC']
-            
-            fig, ax = plt.subplots(figsize=(10, 8), subplot_kw=dict(projection='polar'))
-            
-            angles = np.linspace(0, 2 * np.pi, len(metrics_to_plot), endpoint=False).tolist()
-            angles += angles[:1]  # Complete the circle
-            
-            colors = plt.cm.Set3(np.linspace(0, 1, len(model_results)))
-            
-            for i, (model_name, row) in enumerate(model_results.iterrows()):
-                values = row[metrics_to_plot].tolist()
-                values += values[:1]  # Complete the circle
-                ax.plot(angles, values, 'o-', linewidth=2, label=model_name, color=colors[i])
-                ax.fill(angles, values, alpha=0.25, color=colors[i])
-            
-            ax.set_xticks(angles[:-1])
-            ax.set_xticklabels(metrics_to_plot)
-            ax.set_ylim(0, 1)
-            ax.set_title('Model Performance Radar Chart', size=16, pad=20)
-            ax.legend(loc='upper right', bbox_to_anchor=(1.3, 1.0))
+        # Display comparison table
+        st.subheader("Evaluation Metrics Comparison")
+        st.dataframe(model_results.style.format("{:.4f}").highlight_max(axis=0, color='lightgreen'))
+        
+        # Create visualizations
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.subheader("Accuracy Comparison")
+            fig, ax = plt.subplots(figsize=(10, 6))
+            model_results['Accuracy'].sort_values().plot(kind='barh', ax=ax, color='skyblue')
+            ax.set_xlabel('Accuracy')
+            ax.set_title('Model Accuracy Comparison')
             plt.tight_layout()
             st.pyplot(fig)
-        else:
-            st.error("Model results not found!")
+        
+        with col2:
+            st.subheader("AUC Score Comparison")
+            fig, ax = plt.subplots(figsize=(10, 6))
+            model_results['AUC'].sort_values().plot(kind='barh', ax=ax, color='lightcoral')
+            ax.set_xlabel('AUC Score')
+            ax.set_title('Model AUC Score Comparison')
+            plt.tight_layout()
+            st.pyplot(fig)
+            
+            # Metrics radar chart
+        st.subheader("Comprehensive Metrics Comparison")
+        metrics_to_plot = ['Accuracy', 'AUC', 'Precision', 'Recall', 'F1 Score', 'MCC']
+        
+        fig, ax = plt.subplots(figsize=(10, 8), subplot_kw=dict(projection='polar'))
+        
+        angles = np.linspace(0, 2 * np.pi, len(metrics_to_plot), endpoint=False).tolist()
+        angles += angles[:1]  # Complete the circle
+        
+        colors = plt.cm.Set3(np.linspace(0, 1, len(model_results)))
+        
+        for i, (model_name, row) in enumerate(model_results.iterrows()):
+            values = row[metrics_to_plot].tolist()
+            values += values[:1]  # Complete the circle
+            ax.plot(angles, values, 'o-', linewidth=2, label=model_name, color=colors[i])
+            ax.fill(angles, values, alpha=0.25, color=colors[i])
+        
+        ax.set_xticks(angles[:-1])
+        ax.set_xticklabels(metrics_to_plot)
+        ax.set_ylim(0, 1)
+        ax.set_title('Model Performance Radar Chart', size=16, pad=20)
+        ax.legend(loc='upper right', bbox_to_anchor=(1.3, 1.0))
+        plt.tight_layout()
+        st.pyplot(fig)
+    else:
+        st.error("Model results not found!")
     
     elif page == "Make Prediction":
         st.header("Make Predictions")
