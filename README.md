@@ -103,6 +103,8 @@ heart-disease-classification/
 │-- README.md                 # Project documentation
 │-- heart.csv                 # Dataset
 │-- model_results.csv         # Model performance results
+│-- ML_Assignment2_Final_Submission.pdf  # Complete assignment submission
+│-- Lab_Screenshot.pdf        # BITS Virtual Lab execution proof
 │-- model/                    # Saved model files
 │   |-- logistic_regression.pkl
 │   |-- decision_tree.pkl
