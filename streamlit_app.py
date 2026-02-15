@@ -157,8 +157,6 @@ def main():
         ax.legend(loc='upper right', bbox_to_anchor=(1.3, 1.0))
         plt.tight_layout()
         st.pyplot(fig)
-    else:
-        st.error("Model results not found!")
     
     elif page == "Make Prediction":
         st.header("Make Predictions")
