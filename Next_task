@@ -1,0 +1,63 @@
+Department of Computer Science and Information Technology
+Big Data Systems (CC ZG522)
+ SITUATED LEARNING 
+
+Note: This assignment is designed to bridge the gap between theoretical knowledge of the Hadoop ecosystem and its practical application in solving real-world data challenges. It consists of two parts:
+
+Student Name:
+BITS ID:
+OBJECTIVE
+Identify a data-intensive problem from your current work environment and design a Big Data solution using the tools and techniques learned in this course. This demonstrates your ability to translate domain knowledge into technical solutions.
+REQUIREMENTS
+Problem Identification (3 Marks)
+Clearly describe the business context and domain
+Identify the specific data problem/challenge
+Explain why this is a "Big Data" problem (volume, velocity, variety)
+Define the objectives and expected outcomes
+
+Solution Design (4 Marks)
+Data sourcing strategy (what data, from where, format)
+Architecture design using Hadoop ecosystem tools
+Detailed implementation plan covering:
+Data ingestion approach
+Processing workflow (which tools for which tasks)
+Storage strategy
+Analysis methodology
+
+
+Proof of Concept (3 Marks)
+Implement a small but meaningful part of your solution
+Use at least 3 different Hadoop tools from the course
+Demonstrate working prototype with sample data
+Show preliminary results/insights
+DELIVERABLES
+Project Proposal Document (2-3 pages) covering:
+Problem statement and business context
+Data landscape description
+Solution architecture diagram
+Implementation timeline
+
+Technical Implementation including:
+Code/scripts for the proof of concept
+Sample dataset used for testing
+Screenshots of execution and results
+
+Final Presentation (5-7 slides) covering:
+Problem significance
+Proposed solution
+Proof of concept demonstration
+Business impact and future scope
+SUBMISSION: 
+Submission Format:
+Separate PDF for proposal and presentation
+File Naming: Student_BITS_ID.pdf
+
+Submit the assignment by 6th August 2026, through Taxila only. File submitted by any means outside Taxila will not be accepted and marked. 
+Submission Platform: Taxila only
+Important Notes
+Original Work: Situated Learning must represent original thinking from your work environment or organization.
+In case of any issues, please drop an email to, Prof. Vinayaka S P / Prof. Sudhakumar Raghavan Unnithan (spvinayaka@wilp.bits-pilani.ac.in / sudhakumar_r@wilp.bits-pilani.ac.in)
+
+Evaluation:
+The assignment carries 10 marks
+Plagiarism or copying will result in -10 marks
